@@ -4,10 +4,11 @@ product:
 
 apply: [ ../common.module-template.yaml ]
 
-aliases:
-  - jvmAndAndroid: [jvm, android]
-
 dependencies:
+  - com.soywiz:korlibs-platform:6.0.0
+  - com.soywiz:korlibs-concurrent:6.0.0
+  - com.soywiz:korlibs-serialization:6.0.0
 
 test-dependencies:
-
+  - org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0-RC
+  - com.soywiz:korlibs-time:6.0.0
