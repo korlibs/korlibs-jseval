@@ -12,3 +12,5 @@ dependencies:
 test-dependencies:
   - org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0-RC
   - com.soywiz:korlibs-time:6.0.0
+  #- org.mozilla:rhino:1.7.15
+  - org.openjdk.nashorn:nashorn-core:15.4
