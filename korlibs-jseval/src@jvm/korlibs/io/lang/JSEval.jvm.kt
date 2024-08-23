@@ -4,7 +4,13 @@ import javax.script.*
 
 actual val JSEval = object : IJSEval {
     override val globalThis: Any? get() = engine?.eval("globalThis")
-    override val available: Boolean get() = engine != null
+    override val available: Boolean by lazy {
+        (engine != null).also {
+            if (!it) {
+                println("JSEval: availableEngines=$availableEngines")
+            }
+        }
+    }
 
     val availableEngines get() = ScriptEngineManager().engineFactories.map { it.names }
 
