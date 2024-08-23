@@ -22,4 +22,12 @@ class CommonJsEvalTest {
         assertEquals(10.0, JSEval.exprSuspend("a * b", "a" to 2, "b" to 5))
         assertEquals("world2", JSEval.exprSuspend("hello + 2", "hello" to "world"))
     }
+
+    @Test
+    fun testUint8Array() {
+        if (!JSEval.available) return
+        assertEquals(true, JSEval.available, "available")
+        val array = JSEval("var array = new Uint8Array(16); array[3] = 7; return array;")
+        assertEquals(7.0, JSEval.expr("array[3]", "array" to array))
+    }
 }
