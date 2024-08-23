@@ -16,6 +16,8 @@ actual val JSEval = object : IJSEval {
         listOf("nashorn", "rhino", "JavaScript", "js", "ECMAScript", "ecmascript").firstNotNullOfOrNull {
             ScriptEngineManager().getEngineByName(it)
         }.also {
+            it?.context?.setAttribute(ScriptEngine.LANGUAGE_VERSION, 200, ScriptContext.GLOBAL_SCOPE)
+            //it?.context?.setAttribute("js", it, ScriptContext.ENGINE_SCOPE)
             //it?.context?.writer = OutputStreamWriter(System.out)
         }
     }
@@ -26,6 +28,10 @@ actual val JSEval = object : IJSEval {
         params: Map<String, Any?>,
     ): Any? {
         val engine = engine ?: error("Can't find JavaScript engine in $availableEngines")
-        return engine.eval("(function() { $code })()", engine.createBindings().also { for ((k, v) in params) it[k] = v })
+        val result = engine.eval("(function() { $code })()", engine.createBindings().also { for ((k, v) in params) it[k] = v })
+        return when (result) {
+            is Number -> result.toDouble()
+            else -> result
+        }
     }
 }
