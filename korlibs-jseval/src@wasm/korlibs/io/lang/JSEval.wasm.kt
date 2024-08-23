@@ -30,7 +30,7 @@ actual val JSEval = object : IJSEval {
         if (errorObj != null) {
             throw ExternalJsException(errorObj)
         } else {
-            return result
+            return ensureWasmParam(result)
         }
     }
 
@@ -47,7 +47,10 @@ actual val JSEval = object : IJSEval {
     }
 
     private fun ensureWasmParam(value: Any?): Any? {
+        //println("value: value=${value!!::class}")
         return when (value) {
+            is Int -> value.toDouble()
+            is JsNumber -> value.toDouble()
             is JsString -> value.toString()
             is Int8Array -> value.toByteArray()
             else -> value
@@ -57,6 +60,8 @@ actual val JSEval = object : IJSEval {
     private fun ensureJsParam(value: Any?): JsAny? {
         return when (value) {
             null -> null
+            is Long -> value.toJsBigInt()
+            is Number -> value.toDouble().toJsNumber()
             is ByteArray -> value.toInt8Array()
             is String -> value.toJsString()
             //is JsAny -> value
