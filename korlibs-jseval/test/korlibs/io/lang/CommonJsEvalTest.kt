@@ -42,8 +42,8 @@ class CommonJsEvalTest {
         val testInterface = TestInterface()
         assertEquals(true, testInterface.available)
         assertEquals(null, testInterface("return a * b;", "a" to 2, "b" to 5))
-        assertEquals(null, testInterface.expr("a * b", "a" to 2, "b" to 5))
-        assertEquals(null, testInterface.exprSuspend("a * b", "a" to 2, "b" to 5))
+        assertEquals(null, testInterface.expr("a * b", "a" to 3, "b" to 5))
+        assertEquals(null, testInterface.exprSuspend("a * b", "a" to 4, "b" to 5))
         assertEquals(null, testInterface.invokeSuspend("hello + 2", "hello" to "world"))
     }
 }
