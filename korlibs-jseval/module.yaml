@@ -5,12 +5,12 @@ product:
 apply: [ ../common.module-template.yaml ]
 
 dependencies:
-  - com.soywiz:korlibs-platform:6.0.0
-  - com.soywiz:korlibs-concurrent:6.0.0
-  - com.soywiz:korlibs-serialization:6.0.0
+  - org.korge:korlibs-platform:6.1.0
+  - org.korge:korlibs-concurrent:6.1.0
+  - org.korge:korlibs-serialization:6.1.0
 
 test-dependencies:
-  - org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0-RC
-  - com.soywiz:korlibs-time:6.0.0
-  - org.mozilla:rhino-engine:1.7.15
+  - org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2
+  - org.korge:korlibs-time:6.1.0
+  - org.mozilla:rhino-engine:1.9.1
   #- org.openjdk.nashorn:nashorn-core:15.4
