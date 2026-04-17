@@ -30,4 +30,20 @@ class CommonJsEvalTest {
         val array = JSEval("var array = new Uint8Array(16); array[3] = 7; return array;")
         assertEquals(7.0, JSEval.expr("array[3]", "array" to array))
     }
+
+    @Test
+    fun testInterface() = runTest {
+        class TestInterface : IJSEval {
+            override val available: Boolean get() = true
+            override val globalThis: Any? get() = JSEval.globalThis
+            override operator fun invoke(code: String, params: Map<String, Any?>): Any? = JSEval(code, params)
+        }
+
+        val testInterface = TestInterface()
+        assertEquals(true, testInterface.available)
+        assertEquals(null, testInterface("return a * b;", "a" to 2, "b" to 5))
+        assertEquals(null, testInterface.expr("a * b", "a" to 2, "b" to 5))
+        assertEquals(null, testInterface.exprSuspend("a * b", "a" to 2, "b" to 5))
+        assertEquals(null, testInterface.invokeSuspend("hello + 2", "hello" to "world"))
+    }
 }
