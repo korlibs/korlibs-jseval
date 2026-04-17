@@ -44,6 +44,6 @@ class CommonJsEvalTest {
         assertEquals(10.0, testInterface("return a * b;", "a" to 2, "b" to 5))
         assertEquals(15.0, testInterface.expr("a * b", "a" to 3, "b" to 5))
         assertEquals(20.0, testInterface.exprSuspend("a * b", "a" to 4, "b" to 5))
-        assertEquals("world2", testInterface.invokeSuspend("hello + 2", "hello" to "world"))
+        assertEquals(25.0, testInterface.invokeSuspend("return a * b;", "a" to 5, "b" to 5))
     }
 }
