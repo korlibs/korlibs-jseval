@@ -30,9 +30,11 @@ class CommonJsEvalTest {
         val array = JSEval("var array = new Uint8Array(16); array[3] = 7; return array;")
         assertEquals(7.0, JSEval.expr("array[3]", "array" to array))
     }
-/* Not working on native
+//* Not working on native
     @Test
     fun testInterface() = runTest {
+
+        if (!JSEval.available) return@runTest
         class TestInterface : IJSEval {
             override val available: Boolean get() = true
             override val globalThis: Any? get() = JSEval.globalThis
@@ -46,5 +48,5 @@ class CommonJsEvalTest {
         assertEquals(20.0, testInterface.exprSuspend("a * b", "a" to 4, "b" to 5))
         assertEquals(25.0, testInterface.invokeSuspend("return a * b;", "a" to 5, "b" to 5))
     }
-*/
+// */
 }
