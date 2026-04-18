@@ -52,7 +52,7 @@ actual val JSEval = object : IJSEval {
             is Int -> value.toDouble()
             is JsNumber -> value.toDouble()
             is JsString -> value.toString()
-            is Int8Array -> value.toByteArray()
+            is Int8Array -> int8ArrayToByteArray(value)
             else -> value
         }
     }
@@ -62,10 +62,22 @@ actual val JSEval = object : IJSEval {
             null -> null
             is Long -> value.toJsBigInt()
             is Number -> value.toDouble().toJsNumber()
-            is ByteArray -> value.toInt8Array()
+            is ByteArray -> byteArrayToInt8Array(value)
             is String -> value.toJsString()
             //is JsAny -> value
             else -> value.toJsReference()
         }
+    }
+
+    private fun int8ArrayToByteArray(value: Int8Array): ByteArray {
+        val out = ByteArray(value.length)
+        for (n in 0 until value.length) out[n] = value[n]
+        return out
+    }
+
+    private fun byteArrayToInt8Array(value: ByteArray): Int8Array {
+        val out = Int8Array(value.size)
+        for (n in value.indices) out[n] = value[n]
+        return out
     }
 }

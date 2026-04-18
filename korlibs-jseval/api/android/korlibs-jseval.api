@@ -2,7 +2,7 @@ public abstract interface class korlibs/io/lang/IJSEval {
 	public abstract fun getAvailable ()Z
 	public abstract fun getGlobalThis ()Ljava/lang/Object;
 	public abstract fun invoke (Ljava/lang/String;Ljava/util/Map;)Ljava/lang/Object;
-	public abstract fun invokeSuspend (Ljava/lang/String;Ljava/util/Map;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun invokeSuspend (Ljava/lang/String;Ljava/util/Map;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class korlibs/io/lang/IJSEval$DefaultImpls {
